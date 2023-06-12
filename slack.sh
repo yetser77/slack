@@ -50,7 +50,7 @@ nano /etc/inittab
 useradd -m -s /bin/bash skunkworks
 usermod -aG wheel,audio,video cockpit
 visudo
-passwd cockpit
+passwd skunkworks
 nano /etc/slackpkg/mirrors
 slackpkg update
 cd Downloads
