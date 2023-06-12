@@ -48,7 +48,7 @@ echo -ne "
 
 nano /etc/inittab
 useradd -m -s /bin/bash skunkworks
-usermod -aG wheel,audio,video cockpit
+usermod -aG wheel,audio,video skunkworks
 visudo
 passwd skunkworks
 nano /etc/slackpkg/mirrors
