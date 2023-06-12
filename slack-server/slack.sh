@@ -90,8 +90,8 @@ tar zxvf xdo.tar.gz
 mv xdo-0.5.7.tar.gz xdo
 ./xdo/xdo.SlackBuild
 installpkg /tmp/xdo-0.5.7-x86_64-1_SBo.tgz
-mv xdo.sh /usr/bin
-mv xdo.desktop /usr/share/applications
+nano /usr/bin/xdo.sh
+nano /usr/share/applications/xdo.sh
 wget https://storage.googleapis.com/golang/go1.16.3.src.tar.gz https://slackbuilds.org/slackbuilds/14.2/development/google-go-lang.tar.gz
 tar zxvf google-go-lang.tar.gz
 mv go1.16.3.src.tar.gz google-go-lang
@@ -107,10 +107,28 @@ upgradepkg --install-new docker-20.10.18-x86_64-1alien.txz
 chmod +x /etc/rc.d/rc.docker
 /etc/rc.d/rc.docker start
 docker run hello-world
-
-
-
-
+git clone https://github.com/draychev/tailscale-SlackBuild.git
+cd tailscale-SlackBuild
+make install
+chmod +x /etc/rc.d/rc.tailscale
+/etc/rc.d/rc.tailscale start
+tail -f /var/log/messages | grep -i tailscale
+tailscale up
+docker run -d \
+-v nextcloud:/mnt/nextcloud-mount/var/www/html \
+nextcloud
+docker run -d \
+-v db:/mnt/nextcloud-mount/var/lib/mysql \
+mariadb:10.6
+wget https://download.nomachine.com/download/8.5/Linux/nomachine_8.5.3_1_x86_64.tar.gz
+cp nomachine_8.5.3_1_x86_64.tar.gz /usr
+tar zvf /usr/nomachine_8.5.3_1_x86_64.tar.gz
+/usr/NX/nxserver --install slackware
+/usr/NX/bin/nxserver  --status
+nano /etc/rc.d/rc.local
+nano /etc/rc.d/rc.M
+docker volume create portainer_data
+docker run -d -p 8000:8000 -p 9443:9443 --name Portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
 
 echo -ne "
 All done. Enjoy your new install!
