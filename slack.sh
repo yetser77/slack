@@ -53,6 +53,7 @@ visudo
 passwd skunkworks
 nano /etc/slackpkg/mirrors
 slackpkg update
+mv files/* /home/skunkworks/Downloads
 cd Downloads
 tar zxvf flatpak.tar.gz
 tar zxvf xdg-desktop-portal-gtk.tar.gz
